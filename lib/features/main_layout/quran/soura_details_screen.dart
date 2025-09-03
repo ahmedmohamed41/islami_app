@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:islami_app/core/resources/assets_manager.dart';
 import 'package:islami_app/core/resources/colors_manager.dart';
 import 'package:islami_app/models/sura_model.dart';
+import 'package:islami_app/widgets/custom_verses_details.dart';
 
 class SouraDetailsScreen extends StatefulWidget {
   const SouraDetailsScreen({super.key});
@@ -13,7 +14,7 @@ class SouraDetailsScreen extends StatefulWidget {
 
 class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
   late SuraModel sura;
-  String suraContent = '';
+  List<String> suraLines = [];
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -23,17 +24,19 @@ class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (suraContent.isEmpty) loadSuraContent(sura.suraNumber);
+    if (suraLines.isEmpty) loadSuraContent(sura.suraNumber);
 
     return Scaffold(
       backgroundColor: ColorsManager.black,
       appBar: AppBar(
-       
         backgroundColor: ColorsManager.black,
         foregroundColor: ColorsManager.gold,
         title: Text(
           sura.suraNameEn,
-          style: TextStyle(fontFamily:FontsFamilyManager.fontFamilyJannaLT, fontSize: 20),
+          style: TextStyle(
+            fontFamily: FontsFamilyManager.fontFamilyJannaLT,
+            fontSize: 20,
+          ),
         ),
         centerTitle: true,
       ),
@@ -48,7 +51,7 @@ class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
                 Text(
                   sura.suraNameAr,
                   style: TextStyle(
-                    fontFamily:FontsFamilyManager.fontFamilyJannaLT,
+                    fontFamily: FontsFamilyManager.fontFamilyJannaLT,
                     fontSize: 24,
                     color: ColorsManager.gold,
                   ),
@@ -58,24 +61,13 @@ class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
             ),
           ),
           Expanded(
-            child: suraContent.isEmpty
+            child: suraLines.isEmpty
                 ? Center(
                     child: CircularProgressIndicator(color: ColorsManager.gold),
                   )
-                : SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        textDirection: TextDirection.rtl,
-                        suraContent,
-                        style: TextStyle(
-                          color: ColorsManager.gold,
-                          fontFamily: FontsFamilyManager.fontFamilyJannaLT,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
+                : ListView.builder(
+                    itemBuilder: (context, index) => CustomVersesOfDetails(verse: suraLines[index],number: ++index,),
+                    itemCount: suraLines.length,
                   ),
           ),
           Image.asset(AssetsManager.imgBottomDecoration),
@@ -87,11 +79,10 @@ class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
   void loadSuraContent(String suraIndex) async {
     String filePath = 'assets/files/suras/$suraIndex.txt';
     String fileContent = await rootBundle.loadString(filePath);
-    List<String> suraLines = fileContent.trim().split("\n");
-    for (var i = 0; i < suraLines.length; i++) {
-      suraLines[i] += '[${i + 1}]';
-    }
-    suraContent = suraLines.join();
+    suraLines = fileContent.trim().split("\n");
+    // for (var i = 0; i < suraLines.length; i++) {
+    //   suraLines[i] += '[${i + 1}]';
+    // }
     await Future.delayed(Duration(seconds: 1));
     setState(() {});
   }
