@@ -20,12 +20,12 @@ class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     sura = ModalRoute.of(context)!.settings.arguments as SuraModel;
+    loadSuraContent(sura.suraNumber);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (suraLines.isEmpty) loadSuraContent(sura.suraNumber);
-
+    // if (suraLines.isEmpty) loadSuraContent(sura.suraNumber);
     return Scaffold(
       backgroundColor: ColorsManager.black,
       appBar: AppBar(

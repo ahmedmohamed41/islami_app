@@ -9,7 +9,7 @@ class CustomVersesOfDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      color: ColorsManager.gold,
+      color: ColorsManager.gold.withValues(alpha:0.7),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Text(

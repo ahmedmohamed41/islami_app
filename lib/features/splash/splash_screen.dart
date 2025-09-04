@@ -16,6 +16,11 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     navigator();
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   void navigator() {
     Future.delayed(Duration(seconds: 2), () {
