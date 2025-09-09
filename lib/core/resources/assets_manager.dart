@@ -21,9 +21,10 @@ abstract class AssetsManager {
   static const String imgRightCorner = 'assets/images/img_right_corner.png';
   static const String imgBottomDecoration =
       'assets/images/img_bottom_decoration.png';
+  static const String hadithTapBg = 'assets/images/hadth_tap_bg.png';
+  static const String hadithCardBackGround = 'assets/images/HadithCardBackGround 1.png';
 }
 
 abstract class FontsFamilyManager {
   static const String fontFamilyJannaLT = 'Janna LT';
-
 }
