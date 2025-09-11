@@ -4,6 +4,9 @@ import 'package:islami_app/core/resources/assets_manager.dart';
 import 'package:islami_app/core/resources/colors_manager.dart';
 import 'package:islami_app/models/hadith_model.dart';
 
+import '../../../core/routes_manager/routes_manager.dart';
+import '../../../widgets/custom_sura_name_item.dart';
+
 class HadithItem extends StatefulWidget {
   const HadithItem({super.key, required this.index});
   final int index;
@@ -20,69 +23,83 @@ class _HadithItemState extends State<HadithItem> {
     loadHadithContent(widget.index);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-      decoration: BoxDecoration(
-        color: ColorsManager.gold,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Stack(
-        alignment: AlignmentGeometry.center,
-        children: [
-          Column(
-            children: [
-              Stack(
-                alignment: AlignmentGeometry.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        AssetsManager.imgLeftCorner,
-                        color: ColorsManager.black,
-                      ),
-                      Image.asset(
-                        AssetsManager.imgRightCorner,
-                        color: ColorsManager.black,
-                      ),
-                    ],
-                  ),
-                  Text(
-                    textAlign: TextAlign.center,
-                    hadith?.title ?? "",
-                    style: TextStyle(
-                      fontFamily: FontsFamilyManager.fontFamilyJannaLT,
-                      fontSize: 20,
+    return InkWell(
+      onTap: () {
+
+        Navigator.pushNamed(
+          context,
+          RoutesManager.hadithDetailsScreen,
+          arguments: hadith
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+        decoration: BoxDecoration(
+          color: ColorsManager.gold,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Stack(
+          alignment: AlignmentGeometry.center,
+          children: [
+            Column(
+              children: [
+                Stack(
+                  alignment: AlignmentGeometry.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          AssetsManager.imgLeftCorner,
+                          color: ColorsManager.black,
+                        ),
+                        Image.asset(
+                          AssetsManager.imgRightCorner,
+                          color: ColorsManager.black,
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              Expanded(child: Image.asset(AssetsManager.hadithCardBackGround)),
-              Image.asset(
-                AssetsManager.imgBottomDecoration,
-                color: ColorsManager.black,
-              ),
-            ],
-          ),
-          hadith == null
-              ? Center(child: CircularProgressIndicator())
-              : Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 70),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    textDirection: TextDirection.rtl,
-                    hadith!.content,
-                    style: TextStyle(
-                      fontFamily: FontsFamilyManager.fontFamilyJannaLT,
-                      fontSize: 16,
+                    Text(
+                      textAlign: TextAlign.center,
+                      hadith?.title ?? "",
+                      style: TextStyle(
+                        fontFamily: FontsFamilyManager.fontFamilyJannaLT,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-        ],
+                Expanded(
+                  child: Image.asset(AssetsManager.hadithCardBackGround),
+                ),
+                Image.asset(
+                  AssetsManager.imgBottomDecoration,
+                  color: ColorsManager.black,
+                ),
+              ],
+            ),
+            hadith == null
+                ? Center(child: CircularProgressIndicator())
+                : Padding(
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                      right: 15,
+                      top: 70,
+                    ),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      textDirection: TextDirection.rtl,
+                      hadith!.content,
+                      style: TextStyle(
+                        fontFamily: FontsFamilyManager.fontFamilyJannaLT,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+          ],
+        ),
       ),
     );
   }
@@ -95,7 +112,6 @@ class _HadithItemState extends State<HadithItem> {
     String title = hadithLines[0];
     hadithLines.removeAt(0);
     String content = hadithLines.join();
-    await Future.delayed(Duration(seconds: 1));
     hadith = HadithModel(title: title, content: content);
 
     if (mounted) {

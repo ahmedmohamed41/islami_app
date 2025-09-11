@@ -23,107 +23,109 @@ class _SebhaTapState extends State<SebhaTap> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: AssetImage(AssetsManager.sebhaBackground),
-        ),
-      ),
-      child: Stack(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: Image.asset(
-              AssetsManager.sebhaBackground1,
-              fit: BoxFit.fill,
-            ),
+    return SafeArea(
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage(AssetsManager.sebhaBackground),
           ),
-          Center(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(AssetsManager.sebhalogo),
-                  Text(
-                    'سَبِّحِ اسْمَ رَبِّكَ الأعلى',
-                    style: TextStyle(
-                      fontFamily: FontsFamilyManager.fontFamilyJannaLT,
-                      fontSize: 30,
-                      color: ColorsManager.white,
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 60),
-                            child: Image.asset(AssetsManager.sebhaMask),
-                          ),
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    angle += math.pi / 12.0;
-                                    if (index == 3) {
-                                      index = 0;
-                                      print(index);
-                                    } else {
-                                      if (tik == 6) {
-                                        texts[index++];
-                                        tik = 1;
-                                      } else {
-                                        tik++;
-                                      }
-                                    }
-                                  });
-                                },
-                                child: Transform.rotate(
-                                  angle: angle,
-                                  child: Image.asset(AssetsManager.sebhaBody),
-                                ),
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    index == 3
-                                        ? texts[texts.length - 1]
-                                        : texts[index],
-                                    style: TextStyle(
-                                      fontFamily:
-                                          FontsFamilyManager.fontFamilyJannaLT,
-                                      fontSize: 24,
-                                      color: ColorsManager.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    '$tik',
-                                    style: TextStyle(
-                                      fontFamily:
-                                          FontsFamilyManager.fontFamilyJannaLT,
-                                      fontSize: 30,
-                                      color: ColorsManager.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+        ),
+        child: Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Image.asset(
+                AssetsManager.sebhaBackground1,
+                fit: BoxFit.fill,
               ),
             ),
-          ),
-        ],
+            Center(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(AssetsManager.sebhalogo),
+                    Text(
+                      'سَبِّحِ اسْمَ رَبِّكَ الأعلى',
+                      style: TextStyle(
+                        fontFamily: FontsFamilyManager.fontFamilyJannaLT,
+                        fontSize: 30,
+                        color: ColorsManager.white,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(left: 60),
+                              child: Image.asset(AssetsManager.sebhaMask),
+                            ),
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      angle += math.pi / 12.0;
+                                      if (index == 3) {
+                                        index = 0;
+                                        print(index);
+                                      } else {
+                                        if (tik == 6) {
+                                          texts[index++];
+                                          tik = 1;
+                                        } else {
+                                          tik++;
+                                        }
+                                      }
+                                    });
+                                  },
+                                  child: Transform.rotate(
+                                    angle: angle,
+                                    child: Image.asset(AssetsManager.sebhaBody),
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      index == 3
+                                          ? texts[texts.length - 1]
+                                          : texts[index],
+                                      style: TextStyle(
+                                        fontFamily:
+                                            FontsFamilyManager.fontFamilyJannaLT,
+                                        fontSize: 20,
+                                        color: ColorsManager.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      '$tik',
+                                      style: TextStyle(
+                                        fontFamily:
+                                            FontsFamilyManager.fontFamilyJannaLT,
+                                        fontSize: 20,
+                                        color: ColorsManager.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

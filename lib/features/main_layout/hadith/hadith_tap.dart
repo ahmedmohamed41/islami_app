@@ -20,7 +20,6 @@ class HadithTap extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(AssetsManager.imgHeaderQuranTap),
-
             Expanded(
               child: CarouselSlider(
                 options: CarouselOptions(
