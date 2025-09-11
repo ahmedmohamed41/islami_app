@@ -5,7 +5,7 @@ import 'package:islami_app/models/sura_model.dart';
 import 'package:islami_app/widgets/custom_list_of_most_recently.dart';
 import 'package:islami_app/widgets/custom_list_sura_name.dart';
 import 'package:islami_app/widgets/custom_text_from_field.dart';
-List<SuraModel> listOfMostRecently=[];
+
 class QuranTap extends StatefulWidget {
   const QuranTap({super.key});
 
@@ -15,7 +15,7 @@ class QuranTap extends StatefulWidget {
 
 class _QuranTapState extends State<QuranTap> {
   List<SuraModel> filterdSuras = SuraModel.getAllSurahs;
-  
+  var mostRecentKey = GlobalKey<CustomListOfMostRecentlyState>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,30 +46,23 @@ class _QuranTapState extends State<QuranTap> {
                     filterSurasList(value);
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    'Most Recently',
-                    style: TextStyle(
-                      color: ColorsManager.white,
-                     fontFamily: FontsFamilyManager.fontFamilyJannaLT,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                CustomListOfMostRecently( listOfMostRecently: listOfMostRecently,),
+
+                CustomListOfMostRecently(key: mostRecentKey),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     'Suras List',
                     style: TextStyle(
                       color: ColorsManager.white,
-                     fontFamily: FontsFamilyManager.fontFamilyJannaLT,
+                      fontFamily: FontsFamilyManager.fontFamilyJannaLT,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                CustomListSuraName(filterdSuras: filterdSuras),
+                CustomListSuraName(
+                  filterdSuras: filterdSuras,
+                  mostRecentKey: mostRecentKey,
+                ),
               ],
             ),
           ),

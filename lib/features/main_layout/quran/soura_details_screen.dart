@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:islami_app/core/resources/assets_manager.dart';
 import 'package:islami_app/core/resources/colors_manager.dart';
 import 'package:islami_app/models/sura_model.dart';
+import 'package:islami_app/widgets/custom_sura_name_item.dart';
 import 'package:islami_app/widgets/custom_verses_details.dart';
 
 class SouraDetailsScreen extends StatefulWidget {
@@ -13,14 +14,21 @@ class SouraDetailsScreen extends StatefulWidget {
 }
 
 class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
-  late SuraModel sura;
+
   List<String> suraLines = [];
+  late ArgumentsSuraName argument ;
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    sura = ModalRoute.of(context)!.settings.arguments as SuraModel;
-    loadSuraContent(sura.suraNumber);
+    argument = ModalRoute.of(context)!.settings.arguments as ArgumentsSuraName;
+    loadSuraContent(argument.sura.suraNumber);
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    argument.mostRecentKey.currentState?.fetchMostRecentySuras();
+    super.dispose();
   }
 
   @override
@@ -32,7 +40,7 @@ class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
         backgroundColor: ColorsManager.black,
         foregroundColor: ColorsManager.gold,
         title: Text(
-          sura.suraNameEn,
+          argument.sura.suraNameEn,
           style: TextStyle(
             fontFamily: FontsFamilyManager.fontFamilyJannaLT,
             fontSize: 20,
@@ -49,7 +57,7 @@ class _SouraDetailsScreenState extends State<SouraDetailsScreen> {
               children: [
                 Image.asset(AssetsManager.imgLeftCorner),
                 Text(
-                  sura.suraNameAr,
+                  argument.sura.suraNameAr,
                   style: TextStyle(
                     fontFamily: FontsFamilyManager.fontFamilyJannaLT,
                     fontSize: 24,

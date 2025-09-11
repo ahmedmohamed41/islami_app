@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/core/prefs_manager.dart';
 import 'package:islami_app/core/resources/assets_manager.dart';
 import 'package:islami_app/core/resources/colors_manager.dart';
 import 'package:islami_app/core/routes_manager/routes_manager.dart';
-import 'package:islami_app/features/main_layout/quran/quran_tap.dart';
 import 'package:islami_app/models/sura_model.dart';
 
+import 'custom_list_of_most_recently.dart';
+
 class CustomSuraNameItem extends StatelessWidget {
-  const CustomSuraNameItem({super.key, required this.suraModel});
-  final SuraModel suraModel;
+   CustomSuraNameItem({super.key, required this.sura,required this.mostRecentKey});
+   SuraModel sura;
+   GlobalKey<CustomListOfMostRecentlyState>mostRecentKey ;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        PrefsManager.addSuraIndex(sura.suraNumber);
         Navigator.pushNamed(
           context,
           RoutesManager.souraDetailsScreen,
-          arguments: suraModel,
+          arguments: ArgumentsSuraName(sura: sura, mostRecentKey: mostRecentKey),
         );
-        listOfMostRecently.add(suraModel);
       },
       child: Row(
         children: [
@@ -26,7 +29,7 @@ class CustomSuraNameItem extends StatelessWidget {
             children: [
               Image.asset(AssetsManager.imgSurNumberFrame),
               Text(
-                suraModel.suraNumber,
+                sura.suraNumber,
                 style: TextStyle(
                   fontSize: 15,
                   fontFamily: FontsFamilyManager.fontFamilyJannaLT,
@@ -41,7 +44,7 @@ class CustomSuraNameItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  suraModel.suraNameEn,
+                  sura.suraNameEn,
                   style: TextStyle(
                     color: ColorsManager.white,
                     fontFamily: FontsFamilyManager.fontFamilyJannaLT,
@@ -50,7 +53,7 @@ class CustomSuraNameItem extends StatelessWidget {
                 ),
                 SizedBox(height: 7),
                 Text(
-                  '${suraModel.versesNum} Verses ',
+                  '${sura.versesNum} Verses ',
                   style: TextStyle(
                     color: ColorsManager.white,
                     fontFamily: FontsFamilyManager.fontFamilyJannaLT,
@@ -62,7 +65,7 @@ class CustomSuraNameItem extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            suraModel.suraNameAr,
+            sura.suraNameAr,
             style: TextStyle(
               color: ColorsManager.white,
               fontFamily: FontsFamilyManager.fontFamilyJannaLT,
@@ -73,4 +76,12 @@ class CustomSuraNameItem extends StatelessWidget {
       ),
     );
   }
+}
+
+class ArgumentsSuraName{
+  SuraModel sura;
+  GlobalKey<CustomListOfMostRecentlyState> mostRecentKey;
+
+  ArgumentsSuraName({required this.sura,required this.mostRecentKey});
+
 }
