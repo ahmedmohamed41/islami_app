@@ -5,8 +5,6 @@ import 'package:islami_app/core/resources/colors_manager.dart';
 import 'package:islami_app/models/hadith_model.dart';
 
 import '../../../core/routes_manager/routes_manager.dart';
-import '../../../widgets/custom_sura_name_item.dart';
-
 class HadithItem extends StatefulWidget {
   const HadithItem({super.key, required this.index});
   final int index;

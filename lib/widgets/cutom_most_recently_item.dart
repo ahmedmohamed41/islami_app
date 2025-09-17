@@ -10,7 +10,7 @@ import 'custom_list_of_most_recently.dart';
 import 'custom_sura_name_item.dart';
 
 class CustomMostRecentlyItem extends StatelessWidget {
-  CustomMostRecentlyItem({
+  const CustomMostRecentlyItem({
     super.key,
     required this.model,
     required this.mostRecentKey,

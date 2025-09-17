@@ -14,7 +14,7 @@ abstract class RoutesManager {
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => SplashScreen(),
-    onboarding: (context) => OnBoardingScreeen(),
+    onboarding: (context) => OnBoardingScreen(),
     mainLayout: (context) => MainLayout(),
     souraDetailsScreen: (context) => SouraDetailsScreen(),
     hadithDetailsScreen: (context) => HadithDetailsScreen(),
