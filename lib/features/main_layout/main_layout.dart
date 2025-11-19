@@ -3,9 +3,11 @@ import 'package:islami_app/core/resources/assets_manager.dart';
 import 'package:islami_app/core/resources/colors_manager.dart';
 import 'package:islami_app/features/main_layout/hadith/hadith_tap.dart';
 import 'package:islami_app/features/main_layout/quran/quran_tap.dart';
+import 'package:islami_app/features/main_layout/radio/provider/radio_provider.dart';
 import 'package:islami_app/features/main_layout/radio/radio_tap.dart';
 import 'package:islami_app/features/main_layout/sebha/sebha_tap.dart';
 import 'package:islami_app/features/main_layout/time/time_tap.dart';
+import 'package:provider/provider.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -19,7 +21,10 @@ class _MainLayoutState extends State<MainLayout> {
     QuranTap(),
     HadithTap(),
     SebhaTap(),
-    RadioTap(),
+    ChangeNotifierProvider(
+      create: (context) => RadioProvider(),
+      child: RadioTap(),
+    ),
     TimeTap(),
   ];
   int current = 0;

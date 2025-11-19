@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/core/extensions/extension_context.dart';
-import 'package:islami_app/core/prefs_manager.dart';
+import 'package:islami_app/core/cache/prefs_manager.dart';
 import 'package:islami_app/models/sura_model.dart';
 import 'package:islami_app/widgets/cutom_most_recently_item.dart';
 

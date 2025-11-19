@@ -37,6 +37,10 @@ dependencies:
   carousel_slider: ^5.1.1
   shared_preferences: ^2.5.3
   dots_indicator: ^4.0.1
+  provider: ^6.1.5+1
+  animated_toggle_switch: ^0.8.5
+  http: ^1.6.0
+  just_audio: ^0.10.5
 
 dev_dependencies:
   flutter_test:

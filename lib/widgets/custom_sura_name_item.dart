@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/core/prefs_manager.dart';
+import 'package:islami_app/core/cache/prefs_manager.dart';
 import 'package:islami_app/core/resources/assets_manager.dart';
 import 'package:islami_app/core/resources/colors_manager.dart';
 import 'package:islami_app/core/routes_manager/routes_manager.dart';
@@ -8,9 +8,13 @@ import 'package:islami_app/models/sura_model.dart';
 import 'custom_list_of_most_recently.dart';
 
 class CustomSuraNameItem extends StatelessWidget {
-   CustomSuraNameItem({super.key, required this.sura,required this.mostRecentKey});
-   SuraModel sura;
-   GlobalKey<CustomListOfMostRecentlyState>mostRecentKey ;
+  const CustomSuraNameItem({
+    super.key,
+    required this.sura,
+    required this.mostRecentKey,
+  });
+  final SuraModel sura;
+  final GlobalKey<CustomListOfMostRecentlyState> mostRecentKey;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -19,7 +23,10 @@ class CustomSuraNameItem extends StatelessWidget {
         Navigator.pushNamed(
           context,
           RoutesManager.souraDetailsScreen,
-          arguments: ArgumentsSuraName(sura: sura, mostRecentKey: mostRecentKey),
+          arguments: ArgumentsSuraName(
+            sura: sura,
+            mostRecentKey: mostRecentKey,
+          ),
         );
       },
       child: Row(
@@ -78,10 +85,9 @@ class CustomSuraNameItem extends StatelessWidget {
   }
 }
 
-class ArgumentsSuraName{
+class ArgumentsSuraName {
   SuraModel sura;
   GlobalKey<CustomListOfMostRecentlyState> mostRecentKey;
 
-  ArgumentsSuraName({required this.sura,required this.mostRecentKey});
-
+  ArgumentsSuraName({required this.sura, required this.mostRecentKey});
 }

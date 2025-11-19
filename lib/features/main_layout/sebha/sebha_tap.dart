@@ -70,20 +70,7 @@ class _SebhaTapState extends State<SebhaTap> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    setState(() {
-                                      angle += math.pi / 12.0;
-                                      if (index == 3) {
-                                        index = 0;
-                                        print(index);
-                                      } else {
-                                        if (tik == 6) {
-                                          texts[index++];
-                                          tik = 1;
-                                        } else {
-                                          tik++;
-                                        }
-                                      }
-                                    });
+                                    _rotate();
                                   },
                                   child: Transform.rotate(
                                     angle: angle,
@@ -97,8 +84,8 @@ class _SebhaTapState extends State<SebhaTap> {
                                           ? texts[texts.length - 1]
                                           : texts[index],
                                       style: TextStyle(
-                                        fontFamily:
-                                            FontsFamilyManager.fontFamilyJannaLT,
+                                        fontFamily: FontsFamilyManager
+                                            .fontFamilyJannaLT,
                                         fontSize: 20,
                                         color: ColorsManager.white,
                                       ),
@@ -106,8 +93,8 @@ class _SebhaTapState extends State<SebhaTap> {
                                     Text(
                                       '$tik',
                                       style: TextStyle(
-                                        fontFamily:
-                                            FontsFamilyManager.fontFamilyJannaLT,
+                                        fontFamily: FontsFamilyManager
+                                            .fontFamilyJannaLT,
                                         fontSize: 20,
                                         color: ColorsManager.white,
                                       ),
@@ -128,5 +115,22 @@ class _SebhaTapState extends State<SebhaTap> {
         ),
       ),
     );
+  }
+
+  void _rotate() {
+    setState(() {
+      angle += math.pi / 12.0;
+      if (index == 3) {
+        index = 0;
+        print(index);
+      } else {
+        if (tik == 6) {
+          texts[index++];
+          tik = 1;
+        } else {
+          tik++;
+        }
+      }
+    });
   }
 }
